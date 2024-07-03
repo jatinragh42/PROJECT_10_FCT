@@ -14,11 +14,17 @@ export class OrderlistComponent extends BaseListCtl implements OnInit {
   public form = {
     error: false,
     message: null,
-    preload: [],
+    preload: {
+      customerList: [] // Initialize customer list
+    },
     data: { id: null },
-    inputerror: {},
+    inputerror: { quantity: '', productName: '' },
     searchParams: {
-      date: '' // Initialize date field
+      quantity: '',
+      date: '', // Initialize date field
+      customerId: null, // Initialize customerId to null
+      productName: '',
+      orderDate: ''
     },
     searchMessage: null,
     list: [],
@@ -40,10 +46,59 @@ export class OrderlistComponent extends BaseListCtl implements OnInit {
     this.form.searchParams.date = formattedDate;
   }
 
+  // Convert date to local format for display
+  convertToLocalDate(dateString: string): string {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return date.toLocaleDateString(undefined, options);
+  }
+
+  // Validate input for quantity field
+  validateQuantity() {
+    const quantity = this.form.searchParams.quantity;
+    if (quantity === null || isNaN(Number(quantity)) || Number(quantity) <= 0 || Number(quantity) > 1000) {
+      this.form.inputerror.quantity = 'Invalid quantity. Please enter a number between 1 and 1000.';
+    } else {
+      this.form.inputerror.quantity = ''; // Clear error message if quantity is valid
+    }
+  }
+
+  // Clear quantity input error message when field is cleared
+  clearQuantityError() {
+    if (!this.form.searchParams.quantity) {
+      this.form.inputerror.quantity = '';
+    }
+  }
+
+  validateProductName(event: any) {
+    const value = event.target.value.trim();
+    const regex = /^[a-zA-Z]{1,20}$/; // Alphabetic characters only, length between 3 and 20
+
+    if (value === '') {
+      this.form.inputerror.productName = null; // Clear the error message if the field is empty
+    } else if (!regex.test(value)) {
+      this.form.inputerror.productName = 'Product Name should contain only alphabetic characters and be between 3 to 20 characters long';
+    } else {
+      this.form.inputerror.productName = null;
+      this.form.searchParams.productName = value;
+    }
+  }
+
+  // Clear productName error on input field focus
+  clearProductNameError() {
+    this.form.inputerror.productName = null;
+  }
+
   // Submit method
   submit() {
     // Reset page number before searching
     this.form.pageNo = 0;
+
+    // Check if there are any input errors
+    if (this.form.inputerror.quantity || this.form.inputerror.productName) {
+      return; // Do not proceed with search if there are errors
+    }
+
     // Call the search method after formatting the date
     this.search();
   }

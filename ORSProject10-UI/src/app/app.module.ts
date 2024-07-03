@@ -60,6 +60,34 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { ProductdetailslistComponent } from './productdetails/productdetailslist.component';
 import { PatientComponent } from './patient/patient.component';
 import { PatientlistComponent } from './patient/patientlist.component';
+import { CompanyComponent } from './company/company.component';
+import { CompanylistComponent } from './company/companylist.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { InventorylistComponent } from './inventory/inventorylist.component';
+import { SupplierComponent } from './supplier/supplier.component';
+import { SupplierlistComponent } from './supplier/supplierlist.component';
+import { VehicletrackingComponent } from './vehicletracking/vehicletracking.component';
+import { VehicletrackinglistComponent } from './vehicletracking/vehicletrackinglist.component';
+import { TransportationComponent } from './transportation/transportation.component';
+import { TransportationlistComponent } from './transportation/transportationlist.component';
+import { RouteComponent } from './route/route.component';
+import { RoutelistComponent } from './route/routelist.component';
+import { IssueComponent } from './issue/issue.component';
+import { IssuelistComponent } from './issue/issuelist.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeelistComponent } from './employee/employeelist.component';
+import { JobComponent } from './job/job.component';
+import { JoblistComponent } from './job/joblist.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerlistComponent } from './customer/customerlist.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { TransactionslistComponent } from './transactions/transactionslist.component';
+import { LoansComponent } from './loans/loans.component';
+import { LoanslistComponent } from './loans/loanslist.component';
+import { AtmsComponent } from './atms/atms.component';
+import { AtmslistComponent } from './atms/atmslist.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectlistComponent } from './project/projectlist.component';
 
 
 
@@ -118,7 +146,35 @@ export function myHttpLoader(http: HttpClient) {
     ProductdetailsComponent,
     ProductdetailslistComponent,
     PatientComponent,
-    PatientlistComponent
+    PatientlistComponent,
+    CompanyComponent,
+    CompanylistComponent,
+    InventoryComponent,
+    InventorylistComponent,
+    SupplierComponent,
+    SupplierlistComponent,
+    VehicletrackingComponent,
+    VehicletrackinglistComponent,
+    TransportationComponent,
+    TransportationlistComponent,
+    RouteComponent,
+    RoutelistComponent,
+    IssueComponent,
+    IssuelistComponent,
+    EmployeeComponent,
+    EmployeelistComponent,
+    JobComponent,
+    JoblistComponent,
+    CustomerComponent,
+    CustomerlistComponent,
+    TransactionsComponent,
+    TransactionslistComponent,
+    LoansComponent,
+    LoanslistComponent,
+    AtmsComponent,
+    AtmslistComponent,
+    ProjectComponent,
+    ProjectlistComponent
 
 
 

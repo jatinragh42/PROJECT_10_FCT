@@ -27,20 +27,21 @@ export class UserComponent extends BaseCtl {
     console.log('in submit');
     console.log(this.form);
     console.log(this.form.data);
+  
     this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res) {
       _self.form.message = '';
-      _self.form.data.id = res.result.data;
-      if (_self.fileToUpload) {
-        console.log('rahul');
-        _self.myFile();
-      }
+      _self.form.inputerror = {}; // Clear input errors here
+  
       if (res.success) {
+        _self.form.error = false; // Set error to false on success
         _self.form.message = "Data is saved";
         _self.form.data.id = res.result.data;
-
         console.log(_self.form.data.id);
         console.log("----------Rahul----------.");
-
+  
+        // Clear form data if needed
+        // _self.form.data = {};
+  
       } else {
         _self.form.error = true;
         if (res.result.inputerror) {
@@ -48,7 +49,6 @@ export class UserComponent extends BaseCtl {
         }
         _self.form.message = res.result.message;
       }
-      _self.form.data.id = res.result.data;
       console.log('FORM', _self.form);
     });
   }

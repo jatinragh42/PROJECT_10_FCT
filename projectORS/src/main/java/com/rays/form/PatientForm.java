@@ -19,8 +19,8 @@ import com.rays.validation.ValidLong;
 
 public class PatientForm extends BaseForm {
 
+	@Pattern(regexp = "^[A-Z][a-z]+ [A-Z][a-z]+$", message = "invalid name")
     @NotEmpty(message = "Please enter name")
-    @Pattern(regexp = "^[a-zA-Z\\s'-]+$", message = "Invalid name format")
     private String name;
 
     @NotEmpty(message = "Please enter email")

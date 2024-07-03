@@ -16,7 +16,8 @@ export class OrderComponent extends BaseCtl {
   selected = null;
   userForm: FormGroup = null;
   uploadForm: FormGroup;
-  constructor(public locator: ServiceLocatorService, public route: ActivatedRoute, private httpClient: HttpClient) {
+
+  constructor(public locator: ServiceLocatorService, private formBuilder: FormBuilder, public route: ActivatedRoute, private httpClient: HttpClient) {
     super(locator.endpoints.ORDER, locator, route);
   }
 
@@ -28,15 +29,17 @@ export class OrderComponent extends BaseCtl {
 
     this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res) {
       _self.form.message = '';
-      _self.form.data.id = res.result.data;
-
+      _self.form.inputerror = {}; // Clear input errors here
 
       if (res.success) {
+        _self.form.error = false; // Set error to false on success
         _self.form.message = "Data is saved";
         _self.form.data.id = res.result.data;
-
         console.log(_self.form.data.id);
         console.log("----------Rahul----------.");
+
+        // Clear form data if needed
+        // _self.form.data = {};
 
       } else {
         _self.form.error = true;
@@ -45,7 +48,6 @@ export class OrderComponent extends BaseCtl {
         }
         _self.form.message = res.result.message;
       }
-      _self.form.data.id = res.result.data;
       console.log('FORM', _self.form);
     });
   }
@@ -59,11 +61,9 @@ export class OrderComponent extends BaseCtl {
       _self.form.inputerror = {};
       _self.form.data.id = res.result.data;
 
-
       if (res.success) {
         _self.form.message = "Data is saved";
         _self.form.data.id = res.result.data;
-
 
         console.log(_self.form.data.id);
         console.log("--------------------.");
@@ -78,29 +78,22 @@ export class OrderComponent extends BaseCtl {
     });
   }
 
-
-
-
   onUpload(userform: FormData) {
     this.submit();
     console.log(this.form.data.id + '---- after submit');
-
   }
-
-
 
   validateForm(form) {
     let flag = true;
     let validator = this.serviceLocator.dataValidator;
-    flag = flag && validator.isNotNullObject(form.productId);
-    console.log(form.productId);
+    flag = flag && validator.isNotNullObject(form.customerId);
+    console.log(form.customerId);
     flag = flag && validator.isNotNullObject(form.quantity);
-    console.log(form.qauntity);
-    flag = flag && validator.isNotNullObject(form.amount);
-    console.log(form.address);
-    flag = flag && validator.isNotNullObject(form.date);
-    console.log(form.date);
-
+    console.log(form.quantity);
+    flag = flag && validator.isNotNullObject(form.productName);
+    console.log(form.productName);
+    flag = flag && validator.isNotNullObject(form.orderDate);
+    console.log(form.orderDate);
 
     return flag;
   }
@@ -108,22 +101,41 @@ export class OrderComponent extends BaseCtl {
   populateForm(form, data) {
     form.id = data.id;
     console.log(form.id + 'populate form in shoppingcomponent');
+    form.productName = data.productName;
     form.quantity = data.quantity;
-    form.amount = data.amount;
-    form.date = data.date;
-    form.productId = data.productId;
-
-
+    form.orderDate = data.orderDate;
+    form.customerId = data.customerId;
   }
 
-  validatePhone(event: KeyboardEvent) {
-    const input = event.key;
-    // Check if the input is a number or backspace
-    if ((isNaN(Number(input)) && input !== 'Backspace') || (input === ' ')) {
+  validateProductName(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    const pattern = /^[a-zA-Z]*$/;
+    const currentValue = input.value;
+    const key = event.key;
+
+    if (!pattern.test(key)) {
       event.preventDefault();
     }
-    // Limit the input to 10 characters
-    if (this.form.data.phone && this.form.data.phone.length >= 10 && input !== 'Backspace') {
+
+    // Ensure the total length is between 3 and 20
+    if (currentValue.length + 1 > 20) {
+      event.preventDefault();
+    }
+  }
+
+  validateQuantity(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    const pattern = /^[0-9]*$/;
+    const key = event.key;
+
+    // Allow numbers only
+    if (!pattern.test(key)) {
+      event.preventDefault();
+    }
+
+    // Ensure the value is between 1 and 1000
+    const currentValue = input.value + key;
+    if (parseInt(currentValue) > 1000) {
       event.preventDefault();
     }
   }
@@ -134,8 +146,6 @@ export class OrderComponent extends BaseCtl {
     }
     return null;
   }
-  test() {
 
-  }
 
 }

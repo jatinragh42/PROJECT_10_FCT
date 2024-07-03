@@ -9,7 +9,7 @@ import com.rays.dto.ProductDTO;
 public class ProductForm extends BaseForm {
 
 	public static final int ELECTRONICS = 1;
-	public static final int HOUSEHOLD = 2;
+	public static final int HOUSE_HOLD = 2;
 	public static final int CLOTHING = 3;
 
 	@NotEmpty(message = "please enter name")
@@ -44,4 +44,5 @@ public class ProductForm extends BaseForm {
 		return dto;
 
 	}
+
 }

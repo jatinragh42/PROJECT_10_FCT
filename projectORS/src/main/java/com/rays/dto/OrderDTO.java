@@ -16,17 +16,17 @@ public class OrderDTO extends BaseDTO {
 	@Column(name = "QUANTITY")
 	private Long quantity;
 
-	@Column(name = "DATE")
-	private Date date;
+	@Column(name = "PRODUCT_NAME")
+	private String productName;
 
-	@Column(name = "AMOUNT")
-	private Long amount;
+	@Column(name = "ORDER_DATE")
+	private Date orderDate;
 
-	@Column(name = "PRODUCT_NAME", length = 20)
-	private String productName = null;
+	@Column(name = "CUSTOMER_NAME", length = 20)
+	private String customerName = null;
 
-	@Column(name = "PRODUCT_ID")
-	private Long productId;
+	@Column(name = "CUSTOMER_ID")
+	private Long customerId;
 
 	@Column(name = "ORG_NAME", length = 50)
 	private String orgName;
@@ -39,22 +39,6 @@ public class OrderDTO extends BaseDTO {
 		this.quantity = quantity;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
 	public String getProductName() {
 		return productName;
 	}
@@ -63,12 +47,36 @@ public class OrderDTO extends BaseDTO {
 		this.productName = productName;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public Date getOrderDate() {
+		return orderDate;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getOrgName() {
+		return orgName;
+	}
+
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 
 	public String getKey() {
@@ -103,7 +111,7 @@ public class OrderDTO extends BaseDTO {
 	public LinkedHashMap<String, String> orderBY() {
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		map.put("quantity", "asc");
-		map.put("productName", "asc");
+		map.put("customerName", "asc");
 		return map;
 	}
 

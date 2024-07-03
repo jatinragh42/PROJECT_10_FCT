@@ -25,19 +25,21 @@ export class PatientComponent extends BaseCtl {
     console.log('in submit');
     console.log(this.form);
     console.log(this.form.data);
-
+  
     this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res) {
       _self.form.message = '';
-      _self.form.data.id = res.result.data;
-
-
+      _self.form.inputerror = {}; // Clear input errors here
+  
       if (res.success) {
+        _self.form.error = false; // Set error to false on success
         _self.form.message = "Data is saved";
         _self.form.data.id = res.result.data;
-
         console.log(_self.form.data.id);
         console.log("----------Rahul----------.");
-
+  
+        // Clear form data if needed
+        // _self.form.data = {};
+  
       } else {
         _self.form.error = true;
         if (res.result.inputerror) {
@@ -45,7 +47,6 @@ export class PatientComponent extends BaseCtl {
         }
         _self.form.message = res.result.message;
       }
-      _self.form.data.id = res.result.data;
       console.log('FORM', _self.form);
     });
   }
@@ -133,8 +134,27 @@ export class PatientComponent extends BaseCtl {
     const charStr = String.fromCharCode(charCode);
 
     // Regular expression to test if the character is a letter
-    if (!/^[a-zA-Z]+$/.test(charStr)) {
+    const letterRegex = /^[a-zA-Z\s]+$/;
+
+    // Test if the input matches the allowed characters
+    if (!letterRegex.test(charStr)) {
       event.preventDefault();
+    }
+
+    // Optionally, check the entire value against the name format regex
+    const inputElement = event.target;
+    const inputValue = inputElement.value + charStr; // Add the current character to the input value
+
+    // Regex for valid name format "FirstName LastName"
+    const nameRegex = /^[A-Z][a-z]+ [A-Z][a-z]+$/;
+
+    // Check if the current value matches the valid name format
+    if (!nameRegex.test(inputValue)) {
+      // Handle invalid input (e.g., disable submit button, show error message)
+      // Example:
+      inputElement.classList.add('invalid'); // Apply CSS class for invalid input
+    } else {
+      inputElement.classList.remove('invalid'); // Remove invalid CSS class if format is valid
     }
   }
 

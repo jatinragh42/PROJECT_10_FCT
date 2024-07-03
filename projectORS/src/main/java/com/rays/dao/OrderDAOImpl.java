@@ -14,8 +14,8 @@ import org.springframework.stereotype.Repository;
 
 import com.rays.common.BaseDAOImpl;
 import com.rays.common.UserContext;
+import com.rays.dto.CustomerDTO;
 import com.rays.dto.OrderDTO;
-import com.rays.dto.ProductDTO;
 
 @Repository
 public class OrderDAOImpl extends BaseDAOImpl<OrderDTO> implements OrderDAOInt {
@@ -23,6 +23,19 @@ public class OrderDAOImpl extends BaseDAOImpl<OrderDTO> implements OrderDAOInt {
 	@Override
 	public Class<OrderDTO> getDTOClass() {
 		return OrderDTO.class;
+	}
+
+	@Autowired
+	CustomerDAOInt customerDao;
+
+	@Override
+	protected void populate(OrderDTO dto, UserContext userContext) {
+		if (dto.getCustomerId() != null && dto.getCustomerId() > 0) {
+			CustomerDTO customerDto = customerDao.findByPK(dto.getCustomerId(), userContext);
+			dto.setCustomerName(customerDto.getName());
+			System.out.println(dto.getCustomerName() + "PriorityName-------");
+		}
+
 	}
 
 	@Override
@@ -35,18 +48,12 @@ public class OrderDAOImpl extends BaseDAOImpl<OrderDTO> implements OrderDAOInt {
 		}
 
 		if (!isZeroNumber(dto.getQuantity())) {
-
-			whereCondition.add(builder.like(qRoot.get("quantity"), dto.getQuantity() + "%"));
+			whereCondition.add(builder.equal(qRoot.get("quantity"), dto.getQuantity()));
 		}
 
-		if (!isZeroNumber(dto.getAmount())) {
-
-			whereCondition.add(builder.equal(qRoot.get("amount"), dto.getAmount()));
-		}
-
-		if (isNotNull(dto.getDate())) {
+		if (isNotNull(dto.getOrderDate())) {
 			// Assuming "date" field is of type java.util.Date or java.sql.Date
-			Date searchDate = dto.getDate();
+			Date searchDate = dto.getOrderDate();
 
 			// Define start and end dates for the search day
 			Calendar calendar = Calendar.getInstance();
@@ -62,13 +69,18 @@ public class OrderDAOImpl extends BaseDAOImpl<OrderDTO> implements OrderDAOInt {
 			Date endDate = calendar.getTime();
 
 			// Create predicate for date range
-			Predicate datePredicate = builder.between(qRoot.get("date"), startDate, endDate);
+			Predicate datePredicate = builder.between(qRoot.get("orderDate"), startDate, endDate);
 			whereCondition.add(datePredicate);
 		}
 
-		if (!isZeroNumber(dto.getProductId())) {
+		if (!isZeroNumber(dto.getCustomerId())) {
 
-			whereCondition.add(builder.equal(qRoot.get("productId"), dto.getProductId()));
+			whereCondition.add(builder.equal(qRoot.get("customerId"), dto.getCustomerId()));
+		}
+
+		if (!isEmptyString(dto.getCustomerName())) {
+
+			whereCondition.add(builder.like(qRoot.get("customerName"), dto.getCustomerName() + "%"));
 		}
 
 		if (!isEmptyString(dto.getProductName())) {
@@ -77,19 +89,6 @@ public class OrderDAOImpl extends BaseDAOImpl<OrderDTO> implements OrderDAOInt {
 		}
 
 		return whereCondition;
-	}
-
-	@Autowired
-	ProductDAOInt productDao;
-
-	@Override
-	protected void populate(OrderDTO dto, UserContext userContext) {
-		if (dto.getProductId() != null && dto.getProductId() > 0) {
-			ProductDTO productDto = productDao.findByPK(dto.getProductId(), userContext);
-			dto.setProductName(productDto.getName());
-			System.out.println(dto.getProductName() + "PriorityName-------");
-		}
-
 	}
 
 }

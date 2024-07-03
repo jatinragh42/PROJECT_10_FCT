@@ -2,6 +2,7 @@ package com.rays.validation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -21,7 +22,12 @@ public class DateValidator implements ConstraintValidator<ValidDate, String> {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         sdf.setLenient(false);
         try {
-            sdf.parse(dateStr);
+            Date parsedDate = sdf.parse(dateStr);
+            Date currentDate = new Date();
+            // Check if the parsed date is after the current date
+            if (parsedDate.after(currentDate)) {
+                return false;
+            }
             return true;
         } catch (ParseException e) {
             return false;

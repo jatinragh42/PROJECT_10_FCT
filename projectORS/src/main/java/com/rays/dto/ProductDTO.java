@@ -23,7 +23,7 @@ public class ProductDTO extends BaseDTO {
 	@Column(name = "DESCRIPTION", length = 100)
 	private String description = null;
 
-	@Column(name = "PRIORITY_NAME", length = 50)
+	@Column(name = "PRODUCT_NAME", length = 50)
 	private String productName = null;
 
 	@Column(name = "CAN_READ", length = 1)
@@ -37,14 +37,6 @@ public class ProductDTO extends BaseDTO {
 
 	@Column(name = "CAN_DELETE", length = 1)
 	private String canDelete = YES;
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String priorityName) {
-		this.productName = productName;
-	}
 
 	public String getName() {
 		return name;
@@ -60,6 +52,14 @@ public class ProductDTO extends BaseDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	public String getCanRead() {

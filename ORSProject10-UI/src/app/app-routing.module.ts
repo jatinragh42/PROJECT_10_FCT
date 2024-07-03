@@ -43,6 +43,34 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { ProductdetailslistComponent } from './productdetails/productdetailslist.component';
 import { PatientComponent } from './patient/patient.component';
 import { PatientlistComponent } from './patient/patientlist.component';
+import { CompanyComponent } from './company/company.component';
+import { CompanylistComponent } from './company/companylist.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { InventorylistComponent } from './inventory/inventorylist.component';
+import { SupplierComponent } from './supplier/supplier.component';
+import { SupplierlistComponent } from './supplier/supplierlist.component';
+import { VehicletrackingComponent } from './vehicletracking/vehicletracking.component';
+import { VehicletrackinglistComponent } from './vehicletracking/vehicletrackinglist.component';
+import { TransportationComponent } from './transportation/transportation.component';
+import { TransportationlistComponent } from './transportation/transportationlist.component';
+import { RouteComponent } from './route/route.component';
+import { RoutelistComponent } from './route/routelist.component';
+import { IssueComponent } from './issue/issue.component';
+import { IssuelistComponent } from './issue/issuelist.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeelistComponent } from './employee/employeelist.component';
+import { JobComponent } from './job/job.component';
+import { JoblistComponent } from './job/joblist.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerlistComponent } from './customer/customerlist.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { TransactionslistComponent } from './transactions/transactionslist.component';
+import { LoansComponent } from './loans/loans.component';
+import { LoanslistComponent } from './loans/loanslist.component';
+import { AtmsComponent } from './atms/atms.component';
+import { AtmslistComponent } from './atms/atmslist.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectlistComponent } from './project/projectlist.component';
 
 
 const routes: Routes = [
@@ -305,6 +333,236 @@ const routes: Routes = [
         component: PatientlistComponent
 
     },
+
+    {
+        path: 'inventory',
+        component: InventoryComponent
+
+    },
+    {
+        path: 'inventory/:id',
+        component: InventoryComponent
+
+    },
+    {
+        path: 'inventorylist',
+        component: InventorylistComponent
+
+    },
+
+    {
+        path: 'supplier',
+        component: SupplierComponent
+
+    },
+    {
+        path: 'supplier/:id',
+        component: SupplierComponent
+
+    },
+    {
+        path: 'supplierlist',
+        component: SupplierlistComponent
+
+    },
+
+    {
+        path: 'vehicletracking',
+        component: VehicletrackingComponent
+
+    },
+    {
+        path: 'vehicletracking/:id',
+        component: VehicletrackingComponent
+
+    },
+    {
+        path: 'vehicletrackinglist',
+        component: VehicletrackinglistComponent
+
+    },
+
+    {
+        path: 'company',
+        component: CompanyComponent
+
+    },
+    {
+        path: 'company/:id',
+        component: CompanyComponent
+
+    },
+    {
+        path: 'companylist',
+        component: CompanylistComponent
+
+    },
+
+    {
+        path: 'transportation',
+        component: TransportationComponent
+
+    },
+    {
+        path: 'transportation/:id',
+        component: TransportationComponent
+
+    },
+    {
+        path: 'transportationlist',
+        component: TransportationlistComponent
+
+    },
+
+
+    {
+        path: 'employee',
+        component: EmployeeComponent
+
+    },
+    {
+        path: 'employee/:id',
+        component: EmployeeComponent
+
+    },
+    {
+        path: 'employeelist',
+        component: EmployeelistComponent
+
+    },
+
+    {
+        path: 'job',
+        component: JobComponent
+
+    },
+    {
+        path: 'job/:id',
+        component: JobComponent
+
+    },
+    {
+        path: 'joblist',
+        component: JoblistComponent
+
+    },
+
+    {
+        path: 'customer',
+        component: CustomerComponent
+
+    },
+    {
+        path: 'customer/:id',
+        component: CustomerComponent
+
+    },
+    {
+        path: 'customerlist',
+        component: CustomerlistComponent
+
+    },
+
+    {
+        path: 'transactions',
+        component: TransactionsComponent
+
+    },
+    {
+        path: 'transactions/:id',
+        component: TransactionsComponent
+
+    },
+    {
+        path: 'transactionslist',
+        component: TransactionslistComponent
+
+    },
+
+    {
+        path: 'issue',
+        component: IssueComponent
+
+    },
+    {
+        path: 'issue/:id',
+        component: IssueComponent
+
+    },
+    {
+        path: 'issuelist',
+        component: IssuelistComponent
+
+    },
+
+    {
+        path: 'route',
+        component: RouteComponent
+
+    },
+    {
+        path: 'route/:id',
+        component: RouteComponent
+
+    },
+    {
+        path: 'routelist',
+        component: RoutelistComponent
+
+    },
+
+    {
+        path: 'atms',
+        component: AtmsComponent
+
+    },
+    {
+        path: 'atms/:id',
+        component: AtmsComponent
+
+    },
+    {
+        path: 'atmslist',
+        component: AtmslistComponent
+
+    },
+
+
+    {
+        path: 'project',
+        component: ProjectComponent
+
+    },
+    {
+        path: 'project/:id',
+        component: ProjectComponent
+
+    },
+    {
+        path: 'projectlist',
+        component: ProjectlistComponent
+
+    },
+
+
+    {
+        path: 'loans',
+        component: LoansComponent
+
+    },
+    {
+        path: 'loans/:id',
+        component: LoansComponent
+
+    },
+    {
+        path: 'loanslist',
+        component: LoanslistComponent
+
+    },
+
+
+
     {
         path: 'product',
         component: ProductComponent
